@@ -17,7 +17,8 @@ const commentHook = async () => {
         const htmlElement = node as HTMLElement;
         const isComment =
           htmlElement.tagName === "ARTICLE" &&
-          htmlElement.getAttribute("typeof") === "schema:Comment";
+          htmlElement.getAttribute("data-comment-user-id") &&
+          htmlElement.closest("section#comments"); // we narrow down focus to only comments (sidebar last comments has the exact signature..)
 
         if (isComment) {
           // check if comment needs to be removed, also parse data

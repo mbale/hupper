@@ -1,5 +1,3 @@
-import { render, h } from "preact";
-import BlockUserButton from "../../block/block-user-button";
 import messageBus from "../../message-bus";
 import { MessageKey } from "../../message-bus/keys";
 import { BlockedUser } from "../../settings/blocked-users/types";
