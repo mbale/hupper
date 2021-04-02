@@ -11,12 +11,13 @@ module.exports = {
     hot: true
   },
   entry: {
-    tailwind: path.join(__dirname, "src/runtime-scripts/tailwind.ts"),
+    // dev
+    hr: path.join(__dirname, 'src/_hr/index.ts'),
     popup: path.join(__dirname, "src/popup/index.tsx"),
     settings: path.join(__dirname, 'src/settings/index.tsx'),
-    content: path.join(__dirname, "src/runtime-scripts/content/index.ts"),
-    background: path.join(__dirname, "src/runtime-scripts/background/index.ts"),
-    hr: path.join(__dirname, 'src/_hr/index.ts'),
+    tailwind: path.join(__dirname, "src/core/tailwind.ts"),
+    content: path.join(__dirname, "src/core/content/index.ts"),
+    background: path.join(__dirname, "src/core/background/index.ts"),
   },
   output: { path: path.join(__dirname, "dist"), filename: "[name].js" },
   module: {

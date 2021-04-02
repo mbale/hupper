@@ -1,20 +1,20 @@
-import { initPersistedState, removeBlockedUser } from './slice'
-import { useAppSelector, useAppDispatch } from '../../hooks'
-import AddModal from './add-modal'
-import { useState, useEffect } from 'preact/hooks'
+import { initPersistedState, removeBlockedUser } from "./slice";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import AddModal from "./add-modal";
+import { useState, useEffect } from "preact/hooks";
 
 const BlockedUsers = () => {
-  const [modalIsActive, toggleModal] = useState<boolean>(null);
+  const [modalIsActive, toggleModal] = useState<boolean>(false);
 
   const blockedUsers = useAppSelector((state) => state.blockedUsersSlice.list);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     // @ts-ignore
-    const d = async () => dispatch(initPersistedState())
+    const initState = async () => dispatch(initPersistedState());
 
-    d()
-  }, [])
+    initState();
+  }, []);
 
   return (
     <div class="py-6 px-4 sm:p-6 lg:pb-8">

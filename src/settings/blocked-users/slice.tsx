@@ -1,18 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PersistDataLayer } from "../../utils";
+import { BlockedUser, BlockedUsersState } from './types'
 
 const dataLayer = new PersistDataLayer();
 
 export const BLOCKED_USERS_PERSIST_KEY = 'blocked-users';
-
-export interface BlockedUser {
-  id: number;
-  name: string;
-}
-
-export interface BlockedUsersState {
-  list: BlockedUser[];
-}
 
 const initialState: BlockedUsersState = {
   list: [],

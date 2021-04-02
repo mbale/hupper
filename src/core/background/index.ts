@@ -1,7 +1,7 @@
-import messageBus from '../../message-bus';
-import { BlockedUser, BLOCKED_USERS_PERSIST_KEY } from '../../settings/blocked-users/slice';
+import messageBus, { MessageKey } from '../../message-bus';
+import { BLOCKED_USERS_PERSIST_KEY } from '../../settings/blocked-users/slice';
+import { BlockedUser } from '../../settings/blocked-users/types';
 import { persistDataLayer } from '../../utils'
-import { MessageKey } from '../../message-bus/message-keys'
 
 // get blocked users
 messageBus.addListener<BlockedUser[]>(MessageKey.GetBlockedUserList, async(_) => {

@@ -1,20 +1,20 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import blockedUsersSlice, { initPersistedState } from './settings/blocked-users/slice'
+import blockedUsersSlice from "./settings/blocked-users/slice";
 
 const reducer = combineReducers({
-  blockedUsersSlice
+  blockedUsersSlice,
 });
 
 const createStore = (state?: RootState) => {
   const store = configureStore({
     reducer,
-    preloadedState: {}
+    preloadedState: {},
   });
 
   return store;
 };
 
-const store = createStore()
+const store = createStore();
 
-export type RootState = ReturnType<typeof reducer>
+export type RootState = ReturnType<typeof reducer>;
 export default store;

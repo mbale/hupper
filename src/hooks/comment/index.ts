@@ -1,9 +1,11 @@
 import { render, h } from "preact";
-import messageBus from "../message-bus";
-import { MessageKey } from "../message-bus/message-keys";
-import { BlockedUser } from "../settings/blocked-users/slice";
-import BlockUserButton from "./block-user-button";
+import messageBus, { MessageKey } from "../../message-bus";
+import { BlockedUser } from "../../settings/blocked-users/types";
+import BlockUserButton from "../../block/block-user-button";
 
+/**
+ * Singe entry point whenever a comment is mounted into DOM
+ */
 const commentHook = async () => {
   const observer = new MutationObserver(async (mutations) => {
     const { result: blockedUsers } = await messageBus.sendMessage<
@@ -11,8 +13,8 @@ const commentHook = async () => {
     >(MessageKey.GetBlockedUserList, null);
 
     mutations.forEach(({ addedNodes }) => {
-      addedNodes.forEach((f) => {
-        const htmlElement = f as HTMLElement;
+      addedNodes.forEach((node) => {
+        const htmlElement = node as HTMLElement;
         const isComment =
           htmlElement.tagName === "ARTICLE" &&
           htmlElement.getAttribute("typeof") === "schema:Comment";
@@ -51,14 +53,13 @@ const commentHook = async () => {
             htmlElement.setAttribute("hr-blocked-user", "true");
             htmlElement.style.display = "none";
 
+            const nextElement = htmlElement.nextElementSibling as HTMLElement;
+
             // also check for replies to remove
-            const withReplies = htmlElement.nextElementSibling?.classList.contains(
-              "indented"
-            );
+            const withReplies = nextElement?.classList.contains("indented");
 
             if (withReplies) {
-              (htmlElement.nextElementSibling as HTMLElement).style.display =
-                "none";
+              nextElement.style.display = "none";
             }
           }
         }
