@@ -20,9 +20,6 @@
     "scripts": ["background.js", "hr.js"],
     "persistent": true
   },
-  "web_accessible_resources": [
-    "block.png"
-  ],
   "permissions": ["storage"],
   "content_scripts": [
     {

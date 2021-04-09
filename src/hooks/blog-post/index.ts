@@ -1,3 +1,4 @@
+import { UISettingsState } from "settings/ui/types";
 import messageBus from "../../message-bus";
 import { MessageKey } from "../../message-bus/keys";
 import { BlockedUser } from "../../settings/blocked-users/types";
@@ -11,6 +12,11 @@ const blogPostHook = async () => {
       BlockedUser[]
     >(MessageKey.GetBlockedUserList, null);
 
+    const { result } = await messageBus.sendMessage<UISettingsState>(
+      MessageKey.GetUISettings,
+      null
+    );
+
     mutations.forEach(({ addedNodes }) => {
       addedNodes.forEach((node) => {
         const htmlElement = node as HTMLElement;
@@ -18,16 +24,36 @@ const blogPostHook = async () => {
           htmlElement.tagName === "ARTICLE" &&
           htmlElement.getAttribute("role") === "article";
 
-        if (isBlogPost) {
+        // TODO: move to feature folder
+        if (isBlogPost && blockedUsers?.length) {
           // get user info
-          const userInfoNode = htmlElement.querySelector('[typeof="schema:Person"]')
+          const userInfoNode = htmlElement.querySelector(
+            '[typeof="schema:Person"]'
+          );
           // about=/user/$id
-          const userId = userInfoNode?.getAttribute('about')?.split('/')[2]
-          const parsedId = userId ? parseInt(userId, 10) : null
-          const userIsBlocked = !!(blockedUsers?.find(({ id }) => id === parsedId)) ?? false
+          const userId = userInfoNode?.getAttribute("about")?.split("/")[2];
+          const parsedId = userId ? parseInt(userId, 10) : null;
+          const userIsBlocked =
+            !!blockedUsers.find(({ id }) => id === parsedId) ?? false;
 
           if (userIsBlocked) {
-            htmlElement.style.display = 'none'
+            htmlElement.style.display = "none";
+          }
+        }
+
+        if (result?.twitterBlocked) {
+          // tweet
+            const isTweet =
+            htmlElement.tagName === "DIV" &&
+            htmlElement.classList.contains("twitter-tweet");
+          const isTweetIframe = htmlElement.tagName === "IFRAME";
+          const isTwitterScript =
+            htmlElement?.tagName === "SCRIPT" &&
+            (htmlElement as HTMLScriptElement).src.includes("twitter");
+
+          // TODO: move to feature folder
+          if (isTweetIframe || isTweet || isTwitterScript) {
+            htmlElement.parentElement?.removeChild(htmlElement);
           }
         }
       });

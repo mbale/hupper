@@ -1,4 +1,5 @@
 export enum MessageKey {
   GetBlockedUserList = 'GetBlockedUserList',
-  BlockUser = 'BlockUser'
+  BlockUser = 'BlockUser',
+  GetUISettings = 'GetUISettings',
 }

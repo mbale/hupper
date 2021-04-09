@@ -1,7 +1,7 @@
 import { render, h } from "preact";
 import messageBus, { MessageKey } from "../../message-bus";
 import { BlockedUser } from "../../settings/blocked-users/types";
-import BlockUserButton from "../../block/block-user-button";
+import BlockUserButton from "../../block/user/button";
 
 /**
  * Singe entry point whenever a comment is mounted into DOM
@@ -38,6 +38,7 @@ const commentHook = async () => {
             ({ id }) => id === commentUserId
           );
 
+          // TODO: move to feature folder
           // mount ui block component
           if (commentInfoContainer) {
             // make the two thousand old theme actually responsive
@@ -49,6 +50,7 @@ const commentHook = async () => {
             );
           }
 
+          // TODO: move to feature folder
           // remove if needed
           if (userIsBlocked) {
             htmlElement.setAttribute("hr-blocked-user", "true");

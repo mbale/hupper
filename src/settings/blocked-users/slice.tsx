@@ -4,7 +4,7 @@ import { BlockedUser, BlockedUsersState } from './types'
 
 const dataLayer = new PersistDataLayer();
 
-export const BLOCKED_USERS_PERSIST_KEY = 'blocked-users';
+export const UI_BLOCKED_USERS_PERSIST_KEY = 'blockedUsers';
 
 const initialState: BlockedUsersState = {
   list: [],
@@ -24,28 +24,27 @@ export const {
     },
     addBlockedUser(state, { payload }: PayloadAction<BlockedUser>) {
       state.list = state.list.concat(payload);
-      dataLayer.setItem(BLOCKED_USERS_PERSIST_KEY, state.list);
+      dataLayer.setItem(UI_BLOCKED_USERS_PERSIST_KEY, state.list);
     },
     removeBlockedUser(
       state,
       { payload: userId }: PayloadAction<BlockedUser["id"]>
     ) {
       state.list = state.list.filter((u) => u.id !== userId);
-      dataLayer.setItem(BLOCKED_USERS_PERSIST_KEY, state.list);
+      dataLayer.setItem(UI_BLOCKED_USERS_PERSIST_KEY, state.list);
     },
   },
 });
 
 export const initPersistedState = createAsyncThunk(
-  'blockedUsers/initPersistedState',
+  `${UI_BLOCKED_USERS_PERSIST_KEY}/loadPersisted`,
   async (_, { dispatch }) => {
-    const items = await dataLayer.getItem<BlockedUser[]>(BLOCKED_USERS_PERSIST_KEY)
+    const items = await dataLayer.getItem<BlockedUser[]>(UI_BLOCKED_USERS_PERSIST_KEY)
 
     if (Array.isArray(items)) {
       dispatch(setInitialData(items))
     }
   }
 )
-
 
 export default reducer;

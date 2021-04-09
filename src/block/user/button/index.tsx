@@ -1,7 +1,7 @@
 import "preact";
-import messageBus from "../../message-bus";
-import { MessageKey } from "../../message-bus/keys";
-import { BlockedUser } from "../../settings/blocked-users/types";
+import messageBus from "../../../message-bus";
+import { MessageKey } from "../../../message-bus/keys";
+import { BlockedUser } from "../../../settings/blocked-users/types";
 
 const BlockUserButton = ({ id, name }) => {
   const blockUser = async () => {

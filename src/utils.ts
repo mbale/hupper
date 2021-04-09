@@ -27,7 +27,7 @@ class PersistDataLayer {
   private readonly chromeStorage = chrome.storage?.local
   private readonly localStorage = window.localStorage
 
-  async getItem<T extends object>(key: string): Promise<T | null> {
+  async getItem<T>(key: string): Promise<T | null> {
     return new Promise<T | null>((resolve, reject) => {
       if (this.isChromeStorage) {
         this.chromeStorage.get(key, (result: Record<string, T>) => {

@@ -23,7 +23,7 @@ const BlockedUsers = () => {
         onClose={() => toggleModal((currentState) => !currentState)}
       />
       <div>
-        <h2 class="text-lg leading-6 font-medium text-gray-900">Trollszűrő</h2>
+        <h2 class="text-lg leading-6 font-medium text-gray-900">Blokkolt felhasználók</h2>
       </div>
 
       <div class="mt-6 flex flex-col">

@@ -14,7 +14,7 @@ module.exports = {
     // dev
     hr: path.join(__dirname, 'src/_hr/index.ts'),
     popup: path.join(__dirname, "src/popup/index.tsx"),
-    settings: path.join(__dirname, 'src/settings/index.tsx'),
+    settings: path.join(__dirname, 'src/settings/root.tsx'),
     tailwind: path.join(__dirname, "src/core/tailwind.ts"),
     content: path.join(__dirname, "src/core/content/index.ts"),
     background: path.join(__dirname, "src/core/background/index.ts"),
