@@ -2,7 +2,7 @@
   "name": "Hupper",
   "description": "",
   "manifest_version": 2,
-  "version": "0.0.6",
+  "version": "0.0.8",
   "icons": {
     "16": "logo.png",
     "48": "logo.png",
