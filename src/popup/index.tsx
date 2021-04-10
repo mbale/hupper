@@ -13,7 +13,7 @@ const Popup = () => (
   <>
     <div class="bg-gray-50 sm:rounded-lg" style={{ minWidth: 300 }}>
       <div class="px-4 py-5 sm:p-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900">Hupler</h3>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Hupper</h3>
         <div class="mt-5">
           <button
             onClick={goToSettings}

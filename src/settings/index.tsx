@@ -10,7 +10,7 @@ import UIView from './ui'
 
 const Settings = () => {
   useEffect(() => {
-    document.title = "Hupler - Beállítások";
+    document.title = "Hupper - Beállítások";
   });
   const activeView = useAppSelector((state) => state.settingsRouterSlice.activeView);
 
