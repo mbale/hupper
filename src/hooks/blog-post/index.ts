@@ -43,16 +43,15 @@ const blogPostHook = async () => {
 
         if (result?.twitterBlocked) {
           // tweet
-            const isTweet =
+          const isTweet =
             htmlElement.tagName === "DIV" &&
             htmlElement.classList.contains("twitter-tweet");
-          const isTweetIframe = htmlElement.tagName === "IFRAME";
           const isTwitterScript =
             htmlElement?.tagName === "SCRIPT" &&
             (htmlElement as HTMLScriptElement).src.includes("twitter");
 
           // TODO: move to feature folder
-          if (isTweetIframe || isTweet || isTwitterScript) {
+          if (isTweet || isTwitterScript) {
             htmlElement.parentElement?.removeChild(htmlElement);
           }
         }
