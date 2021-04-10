@@ -22,7 +22,6 @@ export const {
     },
     changeTwitterBlock(state, { payload }: PayloadAction<boolean>) {
       state.twitterBlocked = payload;
-      console.log(payload)
       dataLayer.setItem(UI_SLICE_PERSIST_KEY, state);
     },
   },

@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PersistDataLayer } from "../../utils";
-import { BlockedUser, BlockedUsersState } from './types'
+import { BlockedUser, BlockedUsersState } from "./types";
 
 const dataLayer = new PersistDataLayer();
 
-export const UI_BLOCKED_USERS_PERSIST_KEY = 'blockedUsers';
+export const UI_BLOCKED_USERS_PERSIST_KEY = "blockedUsers";
 
 const initialState: BlockedUsersState = {
   list: [],
@@ -19,7 +19,7 @@ export const {
   reducers: {
     setInitialData(state, { payload }: PayloadAction<BlockedUser[]>) {
       if (Array.isArray(payload)) {
-        state.list = state.list.concat(payload)
+        state.list = payload;
       }
     },
     addBlockedUser(state, { payload }: PayloadAction<BlockedUser>) {
@@ -38,13 +38,15 @@ export const {
 
 export const initPersistedState = createAsyncThunk(
   `${UI_BLOCKED_USERS_PERSIST_KEY}/loadPersisted`,
-  async (_, { dispatch }) => {
-    const items = await dataLayer.getItem<BlockedUser[]>(UI_BLOCKED_USERS_PERSIST_KEY)
+  async (_, { getState, dispatch }) => {
+    const items = await dataLayer.getItem<BlockedUser[]>(
+      UI_BLOCKED_USERS_PERSIST_KEY
+    );
 
     if (Array.isArray(items)) {
-      dispatch(setInitialData(items))
+      dispatch(setInitialData(items));
     }
   }
-)
+);
 
 export default reducer;
